@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Nikservik\UserSettings\Tests;
 
 class ExampleTest extends TestCase
 {
