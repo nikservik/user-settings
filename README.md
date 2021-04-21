@@ -1,32 +1,29 @@
 # User settings storage for Laravel
 
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/nikservik/user_settings/run-tests?label=tests)](https://github.com/nikservik/user_settings/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/nikservik/user_settings/Check%20&%20fix%20styling?label=code%20style)](https://github.com/nikservik/user_settings/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
+Пакет для управления пользовательскими настройками. 
+Хранит настройки в модели User и умеет считывать настройки по умолчанию из пакетов.
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+## Установка
 
-
-## Installation
-
-You can install the package via composer:
+Установка через composer:
 
 ```bash
 composer require nikservik/user-settings
 ```
 
-You can publish and run the migrations with:
+Опубликовать миграцию и выполнить ее:
 
 ```bash
 php artisan vendor:publish  --tag="user-settings-migration"
 php artisan migrate
 ```
 
-You can publish the config file with:
+Опубликовать файл конфигурации, если нужно:
 ```bash
 php artisan vendor:publish  --tag="user-settings-config"
 ```
 
-This is the contents of the published config file:
+Содержание файла конфигурации по умолчанию:
 
 ```php
 return [
@@ -43,27 +40,39 @@ return [
     'settings_attribute' =>  'user_settings',
 ];
 ```
+Конфигурацию стоит публиковать только если нужно отключить какие-то возможности или изменить атрибут, в котором будут храниться настройки в модели пользователя.
 
-## Usage
+### Изменение атрибута для сохранения настроек пользователя
+
+По умолчанию настройки хранятся в атрибуте `user_settings`. 
+
+Чтобы его изменить, нужно: 
+- опубликовать файл настроек и поменять значение `settings_attribute` на нужное.
+- опубликовать файл миграции и поменять в нем название столбца `user_settings` на нужное.
+- выполнить миграцию.
+
+
+## Использование
 
 ```php
 $method = UserSettings::get('jyotish.charts.D1.method', 'parashara');
 ```
+```php
+UserSettings::set('jyotish.charts.D2.method', 'cyclic');
+```
 
-## Testing
+## Тестирование
 
 ```bash
 composer test
 ```
 
-## Changelog
+## История изменений
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+См. [CHANGELOG](CHANGELOG.md).
 
-## Credits
+## TODO
 
-- [Sergey Nikiforov](https://github.com/nikservik)
+- Добавить сохранение и восстановление объектов
+- Добавить поддержку старых настроек из om.astro.expert (mapping)
 
-## License
-
-Commercial license. 
