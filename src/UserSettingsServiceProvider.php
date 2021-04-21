@@ -2,21 +2,31 @@
 
 namespace Nikservik\UserSettings;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
-class UserSettingsServiceProvider extends PackageServiceProvider
+class UserSettingsServiceProvider extends ServiceProvider
 {
-    public function configurePackage(Package $package): void
+    public function boot()
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
-        $package
-            ->name('user-settings')
-            ->hasConfigFile()
-            ->hasMigration('update_users_table');
+        if (! $this->app->runningInConsole())
+            return;
+
+        $this->publishes([
+            __DIR__ . '/../config/user-settings.php' => config_path('user-settings.php'),
+        ], 'user-settings-config');
+
+        if (! class_exists('UpdateUsersTableWithSettings')) {
+            $this->publishes([
+                __DIR__ . '/../database/migrations/update_users_table_with_settings.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_update_users_table_with_settings.php'),
+            ], 'user-settings-migration');
+        }
+    }
+
+    public function register()
+    {
+        $this->app->singleton('user-settings', function() {
+            return new UserSettingsManager;
+        });
+        $this->mergeConfigFrom(__DIR__ . '/../config/user-settings.php', 'user-settings');
     }
 }

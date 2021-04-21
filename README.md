@@ -17,25 +17,30 @@ composer require nikservik/user-settings
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Nikservik\UserSettings\UserSettingsServiceProvider" --tag="user-settings-migrations"
+php artisan vendor:publish  --tag="user-settings-migration"
 php artisan migrate
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --provider="Nikservik\UserSettings\UserSettingsServiceProvider" --tag="user-settings-config"
+php artisan vendor:publish  --tag="user-settings-config"
 ```
 
 This is the contents of the published config file:
 
 ```php
 return [
+    // Какие возможности включены
+    // Чтобы отключить возможность, достаточно ее закомментировать
     'features' => [
         'read-defaults-from-config-files',
         'read-store-user-settings',
         'read-old-user-settings',
         'replace-old-user-settings',
     ],
+
+    // В каком атрибуте модели User хранятся личные настройки пользователя
+    'settings_attribute' =>  'user_settings',
 ];
 ```
 
