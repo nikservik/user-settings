@@ -3,7 +3,6 @@
 
 namespace Nikservik\UserSettings\Contracts;
 
-
 interface UserSettingsInterface
 {
     /*

@@ -2,8 +2,8 @@
 
 namespace Nikservik\UserSettings\Tests;
 
-use Orchestra\Testbench\TestCase as Orchestra;
 use Nikservik\UserSettings\UserSettingsServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {

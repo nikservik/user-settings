@@ -21,19 +21,22 @@ class UserSettingsManager implements UserSettingsInterface
 
     public function get(string $name, $default = null)
     {
-        if ($value = $this->getFromUserSettings(Auth::user(), $name))
+        if ($value = $this->getFromUserSettings(Auth::user(), $name)) {
             return $value;
+        }
 
-        if ($value = $this->getFromConfigDefaults($name))
+        if ($value = $this->getFromConfigDefaults($name)) {
             return $value;
+        }
 
         return $default;
     }
 
     public function set(string $name, $value): self
     {
-        if (! $user = Auth::user())
+        if (! $user = Auth::user()) {
             return $this;
+        }
 
         $settings = $this->getUserSettings($user);
 
@@ -46,19 +49,22 @@ class UserSettingsManager implements UserSettingsInterface
 
     protected function getFromUserSettings($user, $name)
     {
-        if (! $user instanceof User)
+        if (! $user instanceof User) {
             return null;
+        }
 
-        if (! in_array('read-user-settings', Config::get('user-settings.features')))
+        if (! in_array('read-user-settings', Config::get('user-settings.features'))) {
             return null;
+        }
 
         return Arr::get($this->getUserSettings($user), $name);
     }
 
     protected function getFromConfigDefaults($name)
     {
-        if (! in_array('read-defaults-from-config-files', Config::get('user-settings.features')))
+        if (! in_array('read-defaults-from-config-files', Config::get('user-settings.features'))) {
             return null;
+        }
 
         $config = Str::before($name, '.');
         $attribute = Str::after($name, '.');
@@ -75,8 +81,9 @@ class UserSettingsManager implements UserSettingsInterface
 
     protected function setUserSettings(Authenticatable $user, array $settings): void
     {
-        if (! in_array('store-user-settings', Config::get('user-settings.features')))
+        if (! in_array('store-user-settings', Config::get('user-settings.features'))) {
             return;
+        }
 
         $settingsAttribute = $this->settingsAttribute;
 

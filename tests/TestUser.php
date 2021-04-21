@@ -3,7 +3,6 @@
 
 namespace Nikservik\UserSettings\Tests;
 
-
 use Illuminate\Foundation\Auth\User;
 
 /*

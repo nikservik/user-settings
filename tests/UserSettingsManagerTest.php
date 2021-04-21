@@ -2,9 +2,8 @@
 
 namespace Nikservik\UserSettings\Tests;
 
-use Nikservik\UserSettings\UserSettings;
 use Illuminate\Support\Facades\Config;
-
+use Nikservik\UserSettings\UserSettings;
 
 class UserSettingsManagerTest extends TestCase
 {
@@ -111,5 +110,4 @@ class UserSettingsManagerTest extends TestCase
             ->actingAs($user)
             ->assertEquals('user_value', UserSettings::get('test-package.test_setting'));
     }
-
 }

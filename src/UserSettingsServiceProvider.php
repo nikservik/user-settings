@@ -8,8 +8,9 @@ class UserSettingsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        if (! $this->app->runningInConsole())
+        if (! $this->app->runningInConsole()) {
             return;
+        }
 
         $this->publishes([
             __DIR__ . '/../config/user-settings.php' => config_path('user-settings.php'),
@@ -24,7 +25,7 @@ class UserSettingsServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->singleton('user-settings', function() {
+        $this->app->singleton('user-settings', function () {
             return new UserSettingsManager;
         });
         $this->mergeConfigFrom(__DIR__ . '/../config/user-settings.php', 'user-settings');
