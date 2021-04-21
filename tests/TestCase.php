@@ -2,12 +2,8 @@
 
 namespace Nikservik\UserSettings\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Config;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Nikservik\UserSettings\UserSettingsServiceProvider;
-use Illuminate\Support\Facades\Facade;
 
 class TestCase extends Orchestra
 {
