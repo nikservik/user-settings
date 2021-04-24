@@ -5,7 +5,8 @@ namespace Nikservik\UserSettings;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Nikservik\UserSettings\UserSettingsManager
+ * @method static mixed get(string $name, $default = null)
+ * @method static UserSettingsManager set(string $name, $value)
  */
 class UserSettings extends Facade
 {
