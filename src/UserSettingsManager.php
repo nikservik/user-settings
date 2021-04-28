@@ -76,7 +76,7 @@ class UserSettingsManager implements UserSettingsInterface
     {
         $settingsAttribute = $this->settingsAttribute;
 
-        return json_decode($user->$settingsAttribute, true);
+        return json_decode($user->$settingsAttribute, true) ?? [];
     }
 
     protected function setUserSettings(Authenticatable $user, array $settings): void

@@ -36,6 +36,15 @@ class UserSettingsManagerTest extends TestCase
             ->assertEquals('user_value', UserSettings::get('test-package.test_setting', 'default'));
     }
 
+    public function testUserHasEmptySettings()
+    {
+        $user = TestUser::create(['user_settings' => null]);
+
+        $this
+            ->actingAs($user)
+            ->assertEquals('default', UserSettings::get('test-package.test_setting', 'default'));
+    }
+
     public function testUserHasSettingButUserSettingsReadingDisabled()
     {
         Config::set('user-settings.features', []);
