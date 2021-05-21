@@ -56,11 +56,21 @@ return [
 
 ## Использование
 
+### Хранимые значения
 ```php
 $method = UserSettings::get('jyotish.charts.D1.method', 'parashara');
 ```
 ```php
 UserSettings::set('jyotish.charts.D2.method', 'cyclic');
+```
+
+### Blade-директива `feature`
+```blade
+@feature('users.can-send-message')
+    <input name="message" />
+@else
+    Вы не можете отправлять сообщения
+@endfeature
 ```
 
 ## Тестирование
@@ -71,7 +81,16 @@ composer test
 
 ## История изменений
 
-См. [CHANGELOG](CHANGELOG.md).
+### 1.02
+- blade-директива @feature('config.feature')
+
+### 1.0.0 - 2021-04-21
+- чтение настроек из модели авторизованного пользователя
+- чтение настроек из умолчаний настроек модулей
+- отключаемые разрешения
+    - чтение из модели пользователя
+    - сохранение в модель пользователя
+    - чтение из умолчаний настроек модулей
 
 ## TODO
 

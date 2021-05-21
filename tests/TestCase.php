@@ -11,6 +11,7 @@ class TestCase extends Orchestra
     {
         return [
             UserSettingsServiceProvider::class,
+            TestServiceProvider::class,
         ];
     }
 
