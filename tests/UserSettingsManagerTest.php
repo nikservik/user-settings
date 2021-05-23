@@ -66,6 +66,16 @@ class UserSettingsManagerTest extends TestCase
             ->assertEquals('test_value', UserSettings::get('test-package.test_setting', 'default'));
     }
 
+    public function test_get_user_setting_with_value_false()
+    {
+        Config::set('test-package.defaults.test_setting', true);
+        $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":false}}']);
+
+        $this
+            ->actingAs($user)
+            ->assertEquals(false, UserSettings::get('test-package.test_setting', 'default'));
+    }
+
     public function testSetAddsSetting()
     {
         $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);

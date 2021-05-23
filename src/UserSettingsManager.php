@@ -21,11 +21,11 @@ class UserSettingsManager implements UserSettingsInterface
 
     public function get(string $name, $default = null)
     {
-        if ($value = $this->getFromUserSettings(Auth::user(), $name)) {
+        if (! is_null($value = $this->getFromUserSettings(Auth::user(), $name))) {
             return $value;
         }
 
-        if ($value = $this->getFromConfigDefaults($name)) {
+        if (! is_null($value = $this->getFromConfigDefaults($name))) {
             return $value;
         }
 
