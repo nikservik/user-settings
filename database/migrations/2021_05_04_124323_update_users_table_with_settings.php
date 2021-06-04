@@ -9,28 +9,18 @@ class UpdateUsersTableWithSettings extends Migration
 {
     public function up()
     {
-        if (! Schema::hasTable('users')) {
-            // Для тестирования пакета
-            // Если нет таблицы пользователей, то создаем таблицу-заготовку
-            Schema::create('users', function (Blueprint $table) {
-                $table->id();
-
-                $table->timestamps();
-            });
-        }
-
-        if (! Schema::hasColumn('users', Config::get('user-settings.settings_attribute'))) {
+        if (! Schema::hasColumn('users', 'user_settings')) {
             Schema::table('users', function (Blueprint $table) {
-                $table->json(Config::get('user-settings.settings_attribute'))->nullable();
+                $table->json('user_settings')->nullable();
             });
         }
     }
 
     public function down()
     {
-        if (Schema::hasColumn('users', Config::get('user-settings.settings_attribute'))) {
+        if (Schema::hasColumn('users', 'user_settings')) {
             Schema::table('users', function (Blueprint $table) {
-                $table->dropColumn(Config::get('user-settings.settings_attribute'));
+                $table->dropColumn('user_settings');
             });
         }
     }
