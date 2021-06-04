@@ -73,6 +73,18 @@ UserSettings::set('jyotish.charts.D2.method', 'cyclic');
 @endfeature
 ```
 
+### Трейт Settings для модели User
+```php
+class User 
+{
+    use \Nikservik\UserSettings\Traits\Settings;
+}
+
+$user = User::find(123);
+$user->getSettingsValue('place.longitude');
+$user->setSettingsValue('family.children.0.name', 'Bob');
+```
+
 ## Тестирование
 
 ```bash
@@ -80,6 +92,8 @@ composer test
 ```
 
 ## История изменений
+### 1.03
+- трейт Settings
 
 ### 1.02
 - blade-директива @feature('config.feature')
