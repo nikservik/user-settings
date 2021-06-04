@@ -13,16 +13,16 @@ trait Settings
     {
         $settingsAttribute = Config::get('user-settings.settings_attribute');
 
-        return Arr::get(json_decode($this->attributes[$settingsAttribute], true) ?? [], $path);
+        return Arr::get(json_decode($this->$settingsAttribute, true) ?? [], $path);
     }
 
     public function setSettingsValue(string $path, $value)
     {
         $settingsAttribute = Config::get('user-settings.settings_attribute');
 
-        $settings = json_decode($this->attributes[$settingsAttribute], true) ?? [];
+        $settings = json_decode($this->$settingsAttribute, true) ?? [];
         Arr::set($settings, $path, $value);
 
-        $this->attributes[$settingsAttribute] = json_encode($settings);
+        $this->$settingsAttribute = json_encode($settings);
     }
 }
