@@ -7,32 +7,30 @@ use Illuminate\Support\Facades\Schema;
 
 class UpdateUsersTableWithSettings extends Migration
 {
-    protected string $usersTable = 'users';
-
     public function up()
     {
-        if (! Schema::hasTable($this->usersTable)) {
+        if (! Schema::hasTable('users')) {
             // Для тестирования пакета
             // Если нет таблицы пользователей, то создаем таблицу-заготовку
-            Schema::create($this->usersTable, function (Blueprint $table) {
+            Schema::create('users', function (Blueprint $table) {
                 $table->id();
 
                 $table->timestamps();
             });
         }
 
-        if (! Schema::hasColumn($this->usersTable, Config::get('user-settings.settings_attribute'))) {
-            Schema::table($this->usersTable, function (Blueprint $table) {
-                $table->json('user_settings')->nullable();
+        if (! Schema::hasColumn('users', Config::get('user-settings.settings_attribute'))) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->json(Config::get('user-settings.settings_attribute'))->nullable();
             });
         }
     }
 
     public function down()
     {
-        if (Schema::hasColumn($this->usersTable, Config::get('user-settings.settings_attribute'))) {
-            Schema::table($this->usersTable, function (Blueprint $table) {
-                $table->dropColumn('user_settings');
+        if (Schema::hasColumn('users', Config::get('user-settings.settings_attribute'))) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropColumn(Config::get('user-settings.settings_attribute'));
             });
         }
     }

@@ -94,6 +94,7 @@ composer test
 ## История изменений
 ### 1.03
 - трейт Settings
+- миграция исправлена на стандартную
 
 ### 1.02
 - blade-директива @feature('config.feature')

@@ -16,5 +16,10 @@ class TestUser extends User
 
     protected $table = 'users';
 
-    protected $fillable = ['user_settings'];
+    protected $fillable = ['name', 'password', 'email', 'user_settings'];
+
+    public static function createWithSettings(array $attributes)
+    {
+        return TestUser::create(array_merge(['name' => 'Bob', 'password' => 'pass', 'email' => 'bob@example.com'], $attributes));
+    }
 }

@@ -29,7 +29,7 @@ class UserSettingsManagerTest extends TestCase
 
     public function testUserHasSetting()
     {
-        $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
+        $user = TestUser::createWithSettings(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
 
         $this
             ->actingAs($user)
@@ -38,7 +38,7 @@ class UserSettingsManagerTest extends TestCase
 
     public function testUserHasEmptySettings()
     {
-        $user = TestUser::create(['user_settings' => null]);
+        $user = TestUser::createWithSettings(['user_settings' => null]);
 
         $this
             ->actingAs($user)
@@ -48,7 +48,7 @@ class UserSettingsManagerTest extends TestCase
     public function testUserHasSettingButUserSettingsReadingDisabled()
     {
         Config::set('user-settings.features', []);
-        $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
+        $user = TestUser::createWithSettings(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
 
         $this
             ->actingAs($user)
@@ -59,7 +59,7 @@ class UserSettingsManagerTest extends TestCase
     {
         Config::set('user-settings.features', ['read-defaults-from-config-files',]);
         Config::set('test-package.defaults.test_setting', 'test_value');
-        $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
+        $user = TestUser::createWithSettings(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
 
         $this
             ->actingAs($user)
@@ -69,7 +69,7 @@ class UserSettingsManagerTest extends TestCase
     public function test_get_user_setting_with_value_false()
     {
         Config::set('test-package.defaults.test_setting', true);
-        $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":false}}']);
+        $user = TestUser::createWithSettings(['user_settings' => '{"test-package":{"test_setting":false}}']);
 
         $this
             ->actingAs($user)
@@ -78,7 +78,7 @@ class UserSettingsManagerTest extends TestCase
 
     public function testSetAddsSetting()
     {
-        $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
+        $user = TestUser::createWithSettings(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
 
         $this
             ->actingAs($user)
@@ -91,7 +91,7 @@ class UserSettingsManagerTest extends TestCase
 
     public function testSetReplacesSetting()
     {
-        $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
+        $user = TestUser::createWithSettings(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
 
         $this
             ->actingAs($user)
@@ -105,7 +105,7 @@ class UserSettingsManagerTest extends TestCase
     public function testSetDoesNotAddsSettingWhenStoreUserSettingsDisabled()
     {
         Config::set('user-settings.features', ['read-user-settings',]);
-        $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
+        $user = TestUser::createWithSettings(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
 
         $this
             ->actingAs($user)
@@ -119,7 +119,7 @@ class UserSettingsManagerTest extends TestCase
     public function testSetDoesNotReplaceSettingWhenStoreUserSettingsDisabled()
     {
         Config::set('user-settings.features', ['read-user-settings',]);
-        $user = TestUser::create(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
+        $user = TestUser::createWithSettings(['user_settings' => '{"test-package":{"test_setting":"user_value"}}']);
 
         $this
             ->actingAs($user)

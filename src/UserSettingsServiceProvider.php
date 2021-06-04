@@ -19,12 +19,9 @@ class UserSettingsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/user-settings.php' => config_path('user-settings.php'),
         ], 'user-settings-config');
-
-        if (! class_exists('UpdateUsersTableWithSettings')) {
-            $this->publishes([
-                __DIR__ . '/../database/migrations/update_users_table_with_settings.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_update_users_table_with_settings.php'),
-            ], 'user-settings-migration');
-        }
+        $this->publishes([
+            __DIR__.'/../database/migrations/' => database_path('migrations'),
+        ], 'user-settings-migrations');
     }
 
     public function register()

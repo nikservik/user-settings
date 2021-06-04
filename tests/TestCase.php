@@ -2,11 +2,14 @@
 
 namespace Nikservik\UserSettings\Tests;
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Nikservik\UserSettings\UserSettingsServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
+    use DatabaseTransactions;
+
     protected function getPackageProviders($app)
     {
         return [
@@ -17,14 +20,12 @@ class TestCase extends Orchestra
 
     public function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => '',
-        ]);
+        $app['config']->set('database.default', 'mysql');
+    }
 
-        include_once __DIR__.'/../database/migrations/update_users_table_with_settings.php.stub';
-        (new \UpdateUsersTableWithSettings)->up();
+    protected function defineDatabaseMigrations()
+    {
+        $this->loadLaravelMigrations();
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 }
