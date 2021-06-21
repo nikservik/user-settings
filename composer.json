@@ -48,10 +48,7 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true,
-        "github-oauth": {
-            "github.com": "304404ab99d5ad6aec973ae8fe97c27a0d433b73"
-        }
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
