@@ -18,11 +18,6 @@ class TestCase extends Orchestra
         ];
     }
 
-    public function getEnvironmentSetUp($app)
-    {
-        $app['config']->set('database.default', 'mysql');
-    }
-
     protected function defineDatabaseMigrations()
     {
         $this->loadLaravelMigrations();

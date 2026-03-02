@@ -92,6 +92,15 @@ composer test
 ```
 
 ## История изменений
+### 1.06
+- тесты переведены на sqlite in-memory через `phpunit.xml`
+- в `tests/TestCase.php` удалён `getEnvironmentSetUp()` с принудительным MySQL
+- скрипт `composer test` закреплён за `vendor/bin/phpunit`
+
+### 1.04
+- добавлена совместимость dev-зависимостей для Laravel 9 (`orchestra/testbench ^6.16|^7.0`, `phpunit/phpunit ^9.3|^9.5`)
+- добавлен `config.audit.ignore` для PKSA-8qx3-n5y5-vvnd и PKSA-w7xr-vk7n-rstm
+
 ### 1.03
 - трейт Settings
 - миграция исправлена на стандартную
